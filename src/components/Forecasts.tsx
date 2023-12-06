@@ -12,11 +12,12 @@ export default function Forecasts(props) {
 
   forecastData.list.forEach((forecast) => {
     const date = new Date(forecast.dt * 1000);
+
     const day = date.toLocaleDateString("en-US", { weekday: "long" });
 
     if (day !== new Date().toLocaleDateString("en-US", { weekday: "long" })) {
       const existingForecast = dailyForecasts.find((item) => item.day === day);
-//dovevo controllare in qualche modo non esistesse gia una qualsiasi previsione per quel giorno , mi sembr auna soluzione ben migliore di slice 
+
       if (!existingForecast) {
         dailyForecasts.push({
           day,

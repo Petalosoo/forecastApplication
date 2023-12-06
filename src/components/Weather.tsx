@@ -1,8 +1,6 @@
 import React from "react";
 
-export default function Weather(props) {
-  const weatherData = props.weatherData;
-
+export default function Weather({ weatherData, selectedTemperatureUnit }) {
   if (!weatherData) {
     return <p>Caricamento dei dati meteorologici...</p>;
   }
@@ -19,9 +17,20 @@ export default function Weather(props) {
     <>
       <h1>{cityName}</h1>
       <h4>{currentDay}</h4>
-      <h5>{currentTemperature}</h5>
-      <h6>{maxTemperature}</h6>
-      <h6>{minTemperature}</h6>
+
+      {selectedTemperatureUnit === "C" ? (
+        <>
+          <h5>{currentTemperature}</h5>
+          <h6>{maxTemperature}</h6>
+          <h6>{minTemperature}</h6>
+        </>
+      ) : (
+        <>
+          <h5>cane</h5>
+          <h6>culo</h6>
+          <h6>la fessa</h6>
+        </>
+      )}
     </>
   );
 }

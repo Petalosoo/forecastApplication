@@ -1,9 +1,9 @@
-
-import React ,{ useState, useEffect } from "react";
-import FieldsetTemp from "./components/FieldsetTemp";
+import React, { useState, useEffect } from "react";
 import Form from "./components/Form";
 import Forecasts from "./components/Forecasts";
 import Weather from "./components/Weather";
+import TemperatureSelector from "./components/Temperature";
+import "./App.css";
 
 export default function App() {
   const apiKey = "8a21207a65136e3d14b0d44a4e6ef778";
@@ -12,6 +12,7 @@ export default function App() {
 
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
+  const [selectedTemperatureUnit, setSelectedTemperatureUnit] = useState("C");
 
   useEffect(() => {
     let latitude, longitude;
@@ -63,13 +64,24 @@ export default function App() {
     }
   }
 
+  function handleTemperatureChange(unit) {
+    console.log(unit);
+    setSelectedTemperatureUnit(unit);
+  }
+
   return (
     <>
       <h1>Forecast</h1>
       <Form></Form>
-      <FieldsetTemp></FieldsetTemp>
-      <Weather weatherData={weatherData}></Weather>
-      <Forecasts forecastData={forecastData}></Forecasts>
+      <TemperatureSelector onTemperatureChange={handleTemperatureChange} />
+      <Weather
+        weatherData={weatherData}
+        selectedTemperatureUnit={selectedTemperatureUnit}
+      ></Weather>
+      <Forecasts
+        forecastData={forecastData}
+        selectedTemperatureUnit={selectedTemperatureUnit}
+      ></Forecasts>
     </>
   );
 }
