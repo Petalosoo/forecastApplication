@@ -33,7 +33,7 @@ export default function App() {
     );
   }, []);
 
-  async function getWeatherData(latitude, longitude) {
+  async function getWeatherData(latitude :number, longitude  :number) {
     try {
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
@@ -48,7 +48,7 @@ export default function App() {
     }
   }
 
-  async function getForecastData(latitude, longitude) {
+  async function getForecastData(latitude :number, longitude :number) {
     try {
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
@@ -64,15 +64,33 @@ export default function App() {
     }
   }
 
-  function handleTemperatureChange(unit) {
+  function handleTemperatureChange(unit  :string) {
     console.log(unit);
     setSelectedTemperatureUnit(unit);
+  }
+
+  async function handleFormSubmit(location :string) {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Error in API request");
+      }
+
+      const result = await response.json();
+      setWeatherData(result);
+      getForecastData(result.coord.lat, result.coord.lon);
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+    }
   }
 
   return (
     <>
       <h1>Forecast</h1>
-      <Form></Form>
+      <Form onFormSubmit={handleFormSubmit}></Form>
       <TemperatureSelector onTemperatureChange={handleTemperatureChange} />
       <Weather
         weatherData={weatherData}

@@ -1,12 +1,12 @@
 import React from "react";
-
+// non riesco a tipizzare ste prop
 export default function Card({
   cityName,
   day,
   temperature,
   maxTemperature,
   minTemperature,
-}) {
+}:object) {
   return (
     <div className="card">
       <h1>{cityName}</h1>

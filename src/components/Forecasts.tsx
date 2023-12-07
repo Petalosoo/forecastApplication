@@ -8,7 +8,7 @@ export default function Forecasts(props) {
     return <p>Caricamento delle previsioni meteorologiche...</p>;
   }
 
-  const dailyForecasts = [];
+  const dailyForecasts  = [];
 
   forecastData.list.forEach((forecast) => {
     const date = new Date(forecast.dt * 1000);

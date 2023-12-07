@@ -11,7 +11,7 @@ function TemperatureSelector({ onTemperatureChange }) {
 
   return (
     <div>
-      <h3>Seleziona l'unità di temperatura:</h3>
+      <h3>Seleziona l'unità di temperatura:</h3>  
       <label>
         <input
           type="radio"

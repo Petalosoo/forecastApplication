@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useState } from "react";
+//che tipo mettere a sta funzione?
+function Form({ onFormSubmit }) {
+  const [location, setLocation] = useState("");
 
-function Form() {
+  const handleSubmit = (e :Event) => {
+    e.preventDefault();
+    onFormSubmit(location);
+  };
+//perchè mi da picche or su on submit?
   return (
-    <form>
-      <textarea placeholder=" enter a location" cols="30" rows="10"></textarea>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Enter a location"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
+      />
       <button type="submit">GO!</button>
     </form>
   );
 }
 
-export default Form
+export default Form;
